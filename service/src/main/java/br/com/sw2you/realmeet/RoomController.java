@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RoomController implements RoomsApi {
 
-    @Override
-    public CompletableFuture<ResponseEntity<Room>> listRooms(@Valid Long id) {
-        return supplyAsync(() -> ResponseEntity.ok(new Room().id(1L).name("Room #1")));
-    }
+  @Override
+  public CompletableFuture<ResponseEntity<Room>> listRooms(@Valid Long id) {
+    return supplyAsync(() -> ResponseEntity.ok(new Room().id(1L).name("Room #1")));
+  }
 }
