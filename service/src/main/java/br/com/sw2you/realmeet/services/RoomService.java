@@ -1,8 +1,10 @@
-package br.com.sw2you.realmeet.domain.services;
+package br.com.sw2you.realmeet.services;
 
 import br.com.sw2you.realmeet.api.model.RoomDTO;
+import br.com.sw2you.realmeet.domain.entities.Room;
 import br.com.sw2you.realmeet.domain.repositories.RoomRepository;
 import br.com.sw2you.realmeet.exceptions.RoomNotFoundException;
+import br.com.sw2you.realmeet.mappers.RoomMapper;
 import java.util.Objects;
 import org.springframework.stereotype.Service;
 
@@ -10,14 +12,17 @@ import org.springframework.stereotype.Service;
 public class RoomService {
   private final RoomRepository roomRepository;
 
-  public RoomService(RoomRepository roomRepository) {
+  private final RoomMapper roomMapper;
+
+  public RoomService(RoomRepository roomRepository, RoomMapper roomMapper) {
     this.roomRepository = roomRepository;
+    this.roomMapper = roomMapper;
   }
 
   public RoomDTO getRoom(Long id) {
     Objects.requireNonNull(id);
-    var room = roomRepository.findById(id).orElseThrow(RoomNotFoundException::new);
+    Room room = roomRepository.findById(id).orElseThrow(RoomNotFoundException::new);
 
-    return new RoomDTO().name(room.getName()).id(room.getId()).seats(room.getSeats());
+    return roomMapper.convertToDto(room);
   }
 }
