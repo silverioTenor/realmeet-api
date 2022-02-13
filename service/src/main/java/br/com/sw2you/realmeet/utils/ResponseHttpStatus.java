@@ -5,9 +5,9 @@ import org.springframework.http.ResponseEntity;
 
 public abstract class ResponseHttpStatus {
 
-    private ResponseHttpStatus() {}
+  private ResponseHttpStatus() {}
 
-    public static <T> ResponseEntity<T> ok(T body) {
-        return ResponseEntity.status(HttpStatus.OK).body(body);
-    }
+  public static <T> ResponseEntity<T> ok(T body) {
+    return ResponseEntity.status(HttpStatus.OK).body(body);
+  }
 }
