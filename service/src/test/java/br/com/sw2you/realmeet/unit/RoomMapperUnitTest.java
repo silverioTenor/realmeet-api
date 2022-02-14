@@ -2,17 +2,15 @@ package br.com.sw2you.realmeet.unit;
 
 import static br.com.sw2you.realmeet.utils.ConstantsTest.*;
 
+import br.com.sw2you.realmeet.core.BaseUnitTest;
 import br.com.sw2you.realmeet.domain.entities.Room;
 import br.com.sw2you.realmeet.mappers.RoomMapper;
 import br.com.sw2you.realmeet.utils.MapperTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 
-@ExtendWith(MockitoExtension.class)
-class RoomMapperUnitTest {
+class RoomMapperUnitTest extends BaseUnitTest {
   private RoomMapper victim;
 
   @BeforeEach
@@ -21,7 +19,7 @@ class RoomMapperUnitTest {
   }
 
   @Test
-  void TestConvertToRoomDto() {
+  void testConvertToRoomDto() {
     var room = Room
       .newBuilder()
       .id(DEFAULT_ROOM_ID)
