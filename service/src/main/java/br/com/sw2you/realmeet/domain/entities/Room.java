@@ -30,7 +30,9 @@ public class Room {
 
   @PrePersist
   public void prePersist() {
-    active = Objects.isNull(active) || active;
+    if (Objects.isNull(active)) {
+      active = true;
+    }
   }
 
   public Long getId() {
@@ -70,17 +72,17 @@ public class Room {
   @Override
   public String toString() {
     return (
-      "Room{" +
-      "id=" +
+      "Room {\n" +
+      "id: " +
       id +
-      ", name='" +
+      ", name: " +
       name +
       '\'' +
-      ", seats=" +
+      ", seats: " +
       seats +
-      ", active=" +
+      ", active: " +
       active +
-      '}'
+      "\n}"
     );
   }
 

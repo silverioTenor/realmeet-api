@@ -2,7 +2,6 @@
 # = Server
 # =================================
 server:
-  port: 8080
   servlet:
     context-path: /v1
 
@@ -11,22 +10,14 @@ server:
 # =================================
 spring:
   profiles:
-    active: dev
+    active: integration-test
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/dev_realmeet_db?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
-    username: root
-    password: root
-    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+    url: jdbc:tc:mysql://localhost/realmeet
+    username: admin
+    password: admin
   jpa:
     show-sql: true
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        jdbc:
-          lob:
-            non_contextual_creation: true
 
 # =================================
 # = Logging

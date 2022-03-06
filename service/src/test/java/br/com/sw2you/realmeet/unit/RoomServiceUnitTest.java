@@ -1,6 +1,7 @@
 package br.com.sw2you.realmeet.unit;
 
 import static br.com.sw2you.realmeet.utils.ConstantsTest.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import br.com.sw2you.realmeet.core.BaseUnitTest;
 import br.com.sw2you.realmeet.domain.entities.Room;
@@ -34,8 +35,8 @@ class RoomServiceUnitTest extends BaseUnitTest {
 
     var dto = victim.getRoom(DEFAULT_ROOM_ID);
 
-    Assertions.assertEquals(room.getId(), dto.getId());
-    Assertions.assertEquals(room.getName(), dto.getName());
-    Assertions.assertEquals(room.getSeats(), dto.getSeats());
+    assertEquals(room.getId(), dto.getId());
+    assertEquals(room.getName(), dto.getName());
+    assertEquals(room.getSeats(), dto.getSeats());
   }
 }
