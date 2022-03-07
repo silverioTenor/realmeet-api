@@ -2,10 +2,12 @@ package br.com.sw2you.realmeet.unit;
 
 import static br.com.sw2you.realmeet.utils.ConstantsTest.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import br.com.sw2you.realmeet.core.BaseUnitTest;
 import br.com.sw2you.realmeet.domain.entities.Room;
 import br.com.sw2you.realmeet.domain.repositories.RoomRepository;
+import br.com.sw2you.realmeet.exceptions.RoomNotFoundException;
 import br.com.sw2you.realmeet.mappers.RoomMapper;
 import br.com.sw2you.realmeet.services.RoomService;
 import br.com.sw2you.realmeet.utils.DataCreatorTest;
@@ -29,14 +31,20 @@ class RoomServiceUnitTest extends BaseUnitTest {
   }
 
   @Test
-  void testGetRoom() {
+  void testGetRoomSuccess() {
     var room = DataCreatorTest.roomBuilder().id(DEFAULT_ROOM_ID).build();
-    Mockito.when(roomRepository.findById(DEFAULT_ROOM_ID)).thenReturn(Optional.of(room));
+    Mockito.when(roomRepository.findByIdAndActive(DEFAULT_ROOM_ID, true)).thenReturn(Optional.of(room));
 
     var dto = victim.getRoom(DEFAULT_ROOM_ID);
 
     assertEquals(room.getId(), dto.getId());
     assertEquals(room.getName(), dto.getName());
     assertEquals(room.getSeats(), dto.getSeats());
+  }
+
+  @Test
+  void testGetRoomNotFound() {
+    Mockito.when(roomRepository.findByIdAndActive(DEFAULT_ROOM_ID, true)).thenReturn(Optional.empty());
+    assertThrows(RoomNotFoundException.class, () -> victim.getRoom(DEFAULT_ROOM_ID));
   }
 }
